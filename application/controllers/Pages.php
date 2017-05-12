@@ -19,15 +19,19 @@ class Pages extends CI_Controller {
 //    local function
     public function view ($page = 'home' )
     {
-        if (!file_exists(APPPATH . 'views/pages/' . $page . ' .Php')) {
+//        APPPATH (stands for application path - the application
+        $filename = APPPATH.'views/pages/'.$page.'.php';
+
+        if (!file_exists($filename))
+        {
             Show_404(); //Whoops, there is no such page!
         }
 
-        $data['title'] = ucfirst($page); // capital letters capitalize
+        $data['title'] = ucfirst($page); // makes the string's first character uppercase
 
 //        codeigniter function
         $this->load->view('templates/header' , $data);
-        $this->load->view('pages/'. $page , $data);
+        $this->load->view('pages/' . $page, $data);
         $this->load->view('templates/footer' , $data);
     }
 }
